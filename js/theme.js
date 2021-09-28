@@ -1,7 +1,7 @@
-var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
+var jQuery = (typeof (window) != 'undefined') ? window.jQuery : require('jquery');
 
 // Sphinx theme nav state
-function ThemeNav () {
+function ThemeNav() {
 
     var nav = {
         navBar: null,
@@ -22,7 +22,7 @@ function ThemeNav () {
         // out from the RTD assets. This just ensures old projects that are
         // calling `enable()` get the sticky menu on by default. All other cals
         // to `enable` should include an argument for enabling the sticky menu.
-        if (typeof(withStickyNav) == 'undefined') {
+        if (typeof (withStickyNav) == 'undefined') {
             withStickyNav = true;
         }
 
@@ -44,7 +44,7 @@ function ThemeNav () {
                     if (!self.linkScroll) {
                         if (!self.winScroll) {
                             self.winScroll = true;
-                            requestAnimationFrame(function() { self.onScroll(); });
+                            requestAnimationFrame(function () { self.onScroll(); });
                         }
                     }
                 });
@@ -54,7 +54,7 @@ function ThemeNav () {
             self.win.on('resize', function () {
                 if (!self.winResize) {
                     self.winResize = true;
-                    requestAnimationFrame(function() { self.onResize(); });
+                    requestAnimationFrame(function () { self.onResize(); });
                 }
             });
 
@@ -65,7 +65,7 @@ function ThemeNav () {
 
     // TODO remove this with a split in theme and Read the Docs JS logic as
     // well, it's only here to support 0.3.0 installs of our theme.
-    nav.enableSticky = function() {
+    nav.enableSticky = function () {
         this.enable(true);
     };
 
@@ -79,13 +79,13 @@ function ThemeNav () {
         // Set up javascript UX bits
         $(document)
             // Shift nav in mobile when clicking the menu.
-            .on('click', "[data-toggle='pytorch-left-menu-nav-top']", function() {
+            .on('click', "[data-toggle='pytorch-left-menu-nav-top']", function () {
                 $("[data-toggle='wy-nav-shift']").toggleClass("shift");
                 $("[data-toggle='rst-versions']").toggleClass("shift");
             })
 
             // Nav menu link click operations
-            .on('click', ".pytorch-menu-vertical .current ul li a", function() {
+            .on('click', ".pytorch-menu-vertical .current ul li a", function () {
                 var target = $(this);
                 // Close menu when you click a link.
                 $("[data-toggle='wy-nav-shift']").removeClass("shift");
@@ -94,7 +94,7 @@ function ThemeNav () {
                 self.toggleCurrent(target);
                 self.hashChange();
             })
-            .on('click', "[data-toggle='rst-current-version']", function() {
+            .on('click', "[data-toggle='rst-current-version']", function () {
                 $("[data-toggle='rst-versions']").toggleClass("shift-up");
             })
 
@@ -112,7 +112,7 @@ function ThemeNav () {
         // Add expand links to all parents of nested ul
         $('.pytorch-menu-vertical ul').not('.simple').siblings('a').each(function () {
             var link = $(this);
-                expand = $('<span class="toctree-expand"></span>');
+            expand = $('<span class="toctree-expand"></span>');
             expand.on('click', function (ev) {
                 self.toggleCurrent(link);
                 ev.stopPropagation();
@@ -161,16 +161,16 @@ function ThemeNav () {
     };
 
     nav.onScroll = function () {
-        this.winScroll = false;
-        var newWinPosition = this.win.scrollTop(),
-            winBottom = newWinPosition + this.winHeight,
-            navPosition = this.navBar.scrollTop(),
-            newNavPosition = navPosition + (newWinPosition - this.winPosition);
-        if (newWinPosition < 0 || winBottom > this.docHeight) {
-            return;
-        }
-        this.navBar.scrollTop(newNavPosition);
-        this.winPosition = newWinPosition;
+        // this.winScroll = false;
+        // var newWinPosition = this.win.scrollTop(),
+        //     winBottom = newWinPosition + this.winHeight,
+        //     navPosition = this.navBar.scrollTop(),
+        //     newNavPosition = navPosition + (newWinPosition - this.winPosition);
+        // if (newWinPosition < 0 || winBottom > this.docHeight) {
+        //     return;
+        // }
+        // this.navBar.scrollTop(newNavPosition);
+        // this.winPosition = newWinPosition;
     };
 
     nav.onResize = function () {
@@ -199,7 +199,7 @@ function ThemeNav () {
 
 module.exports.ThemeNav = ThemeNav();
 
-if (typeof(window) != 'undefined') {
+if (typeof (window) != 'undefined') {
     window.SphinxRtdTheme = {
         Navigation: module.exports.ThemeNav,
         // TODO remove this once static assets are split up between the theme
@@ -214,27 +214,27 @@ if (typeof(window) != 'undefined') {
 // https://gist.github.com/paulirish/1579671
 // MIT license
 
-(function() {
+(function () {
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+    for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame']
+            || window[vendors[x] + 'CancelRequestAnimationFrame'];
     }
 
     if (!window.requestAnimationFrame)
-        window.requestAnimationFrame = function(callback, element) {
+        window.requestAnimationFrame = function (callback, element) {
             var currTime = new Date().getTime();
             var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-              timeToCall);
+            var id = window.setTimeout(function () { callback(currTime + timeToCall); },
+                timeToCall);
             lastTime = currTime + timeToCall;
             return id;
         };
 
     if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function(id) {
+        window.cancelAnimationFrame = function (id) {
             clearTimeout(id);
         };
 }());
@@ -248,7 +248,7 @@ $("table").removeAttr("border");
 var downloadNote = $(".sphx-glr-download-link-note.admonition.note");
 if (downloadNote.length >= 1) {
     var tutorialUrlArray = $("#tutorial-type").text().split('/');
-        tutorialUrlArray[0] = tutorialUrlArray[0] + "_source"
+    tutorialUrlArray[0] = tutorialUrlArray[0] + "_source"
 
     var githubLink = "https://github.com/pytorch/tutorials/blob/master/" + tutorialUrlArray.join("/") + ".py",
         notebookLink = $(".reference.download")[1].href,
@@ -264,60 +264,60 @@ if (downloadNote.length >= 1) {
 
 //This code handles the Expand/Hide toggle for the Docs/Tutorials left nav items
 
-$(document).ready(function() {
-  var caption = "#pytorch-left-menu p.caption";
-  var collapseAdded = $(this).not("checked");
-  $(caption).each(function () {
-    var menuName = this.innerText.replace(/[^\w\s]/gi, "").trim();
-    $(this).find("span").addClass("checked");
-    if (collapsedSections.includes(menuName) == true && collapseAdded && sessionStorage.getItem(menuName) !== "expand" || sessionStorage.getItem(menuName) == "collapse") {
-      $(this.firstChild).after("<span class='expand-menu'>[ + ]</span>");
-      $(this.firstChild).after("<span class='hide-menu collapse'>[ - ]</span>");
-      $(this).next("ul").hide();
-    } else if (collapsedSections.includes(menuName) == false && collapseAdded || sessionStorage.getItem(menuName) == "expand") {
-      $(this.firstChild).after("<span class='expand-menu collapse'>[ + ]</span>");
-      $(this.firstChild).after("<span class='hide-menu'>[ - ]</span>");
-    }
-  });
+$(document).ready(function () {
+    var caption = "#pytorch-left-menu p.caption";
+    var collapseAdded = $(this).not("checked");
+    $(caption).each(function () {
+        var menuName = this.innerText.replace(/[^\w\s]/gi, "").trim();
+        $(this).find("span").addClass("checked");
+        if (collapsedSections.includes(menuName) == true && collapseAdded && sessionStorage.getItem(menuName) !== "expand" || sessionStorage.getItem(menuName) == "collapse") {
+            $(this.firstChild).after("<span class='expand-menu'>[ + ]</span>");
+            $(this.firstChild).after("<span class='hide-menu collapse'>[ - ]</span>");
+            $(this).next("ul").hide();
+        } else if (collapsedSections.includes(menuName) == false && collapseAdded || sessionStorage.getItem(menuName) == "expand") {
+            $(this.firstChild).after("<span class='expand-menu collapse'>[ + ]</span>");
+            $(this.firstChild).after("<span class='hide-menu'>[ - ]</span>");
+        }
+    });
 
-  $(".expand-menu").on("click", function () {
-    $(this).prev(".hide-menu").toggle();
-    $(this).parent().next("ul").toggle();
-    var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
-    if (sessionStorage.getItem(menuName) == "collapse") {
-      sessionStorage.removeItem(menuName);
-    }
-    sessionStorage.setItem(menuName, "expand");
-    toggleList(this);
-  });
+    $(".expand-menu").on("click", function () {
+        $(this).prev(".hide-menu").toggle();
+        $(this).parent().next("ul").toggle();
+        var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
+        if (sessionStorage.getItem(menuName) == "collapse") {
+            sessionStorage.removeItem(menuName);
+        }
+        sessionStorage.setItem(menuName, "expand");
+        toggleList(this);
+    });
 
-  $(".hide-menu").on("click", function () {
-    $(this).next(".expand-menu").toggle();
-    $(this).parent().next("ul").toggle();
-    var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
-    if (sessionStorage.getItem(menuName) == "expand") {
-      sessionStorage.removeItem(menuName);
-    }
-    sessionStorage.setItem(menuName, "collapse");
-    toggleList(this);
-  });
+    $(".hide-menu").on("click", function () {
+        $(this).next(".expand-menu").toggle();
+        $(this).parent().next("ul").toggle();
+        var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
+        if (sessionStorage.getItem(menuName) == "expand") {
+            sessionStorage.removeItem(menuName);
+        }
+        sessionStorage.setItem(menuName, "collapse");
+        toggleList(this);
+    });
 
-  function toggleList(menuCommand) {
-    $(menuCommand).toggle();
-  }
+    function toggleList(menuCommand) {
+        $(menuCommand).toggle();
+    }
 });
 
 // Build an array from each tag that's present
 
-var tagList = $(".tutorials-card-container").map(function() {
-    return $(this).data("tags").split(",").map(function(item) {
+var tagList = $(".tutorials-card-container").map(function () {
+    return $(this).data("tags").split(",").map(function (item) {
         return item.trim();
-      });
+    });
 }).get();
 
 function unique(value, index, self) {
-      return self.indexOf(value) == index && value != ""
-    }
+    return self.indexOf(value) == index && value != ""
+}
 
 // Only return unique tags
 
@@ -326,44 +326,44 @@ var tags = tagList.sort().filter(unique);
 // Add filter buttons to the top of the page for each tag
 
 function createTagMenu() {
-    tags.forEach(function(item){
-    $(".tutorial-filter-menu").append(" <div class='tutorial-filter filter-btn filter' data-tag='" + item + "'>" + item + "</div>")
-  })
+    tags.forEach(function (item) {
+        $(".tutorial-filter-menu").append(" <div class='tutorial-filter filter-btn filter' data-tag='" + item + "'>" + item + "</div>")
+    })
 };
 
 createTagMenu();
 
 // Remove hyphens if they are present in the filter buttons
 
-$(".tags").each(function(){
+$(".tags").each(function () {
     var tags = $(this).text().split(",");
-    tags.forEach(function(tag, i ) {
-       tags[i] = tags[i].replace(/-/, ' ')
+    tags.forEach(function (tag, i) {
+        tags[i] = tags[i].replace(/-/, ' ')
     })
     $(this).html(tags.join(", "));
 });
 
 // Remove hyphens if they are present in the card body
 
-$(".tutorial-filter").each(function(){
+$(".tutorial-filter").each(function () {
     var tag = $(this).text();
     $(this).html(tag.replace(/-/, ' '))
 })
 
 // Remove any empty p tags that Sphinx adds
 
-$("#tutorial-cards p").each(function(index, item) {
-    if(!$(item).text().trim()) {
+$("#tutorial-cards p").each(function (index, item) {
+    if (!$(item).text().trim()) {
         $(item).remove();
     }
 });
 
 // Jump back to top on pagination click
 
-$(document).on("click", ".page", function() {
+$(document).on("click", ".page", function () {
     $('html, body').animate(
-      {scrollTop: $("#dropdown-filter-tags").position().top},
-      'slow'
+        { scrollTop: $("#dropdown-filter-tags").position().top },
+        'slow'
     );
 });
 
@@ -374,16 +374,16 @@ if (link.text() == "SyntaxError") {
     link.text("Speech Command Recognition with torchaudio");
 }
 
-$(".stars-outer > i").hover(function() {
+$(".stars-outer > i").hover(function () {
     $(this).prevAll().addBack().toggleClass("fas star-fill");
 });
 
-$(".stars-outer > i").on("click", function() {
-    $(this).prevAll().each(function() {
+$(".stars-outer > i").on("click", function () {
+    $(this).prevAll().each(function () {
         $(this).addBack().addClass("fas star-fill");
     });
 
-    $(".stars-outer > i").each(function() {
+    $(".stars-outer > i").each(function () {
         $(this).unbind("mouseenter mouseleave").css({
             "pointer-events": "none"
         });
@@ -391,41 +391,41 @@ $(".stars-outer > i").on("click", function() {
 })
 
 $("#pytorch-side-scroll-right li a").on("click", function (e) {
-  var href = $(this).attr("href");
-  $('html, body').stop().animate({
-    scrollTop: $(href).offset().top - 100
-  }, 850);
-  e.preventDefault;
+    var href = $(this).attr("href");
+    $('html, body').stop().animate({
+        scrollTop: $(href).offset().top - 100
+    }, 850);
+    e.preventDefault;
 });
 
 var lastId,
-  topMenu = $("#pytorch-side-scroll-right"),
-  topMenuHeight = topMenu.outerHeight() + 1,
-  // All sidenav items
-  menuItems = topMenu.find("a"),
-  // Anchors for menu items
-  scrollItems = menuItems.map(function () {
-    var item = $(this).attr("href");
-    if (item.length) {
-      return item;
-    }
-  });
+    topMenu = $("#pytorch-side-scroll-right"),
+    topMenuHeight = topMenu.outerHeight() + 1,
+    // All sidenav items
+    menuItems = topMenu.find("a"),
+    // Anchors for menu items
+    scrollItems = menuItems.map(function () {
+        var item = $(this).attr("href");
+        if (item.length) {
+            return item;
+        }
+    });
 
 $(window).scroll(function () {
-  var fromTop = $(this).scrollTop() + topMenuHeight;
-  var article = ".section";
+    var fromTop = $(this).scrollTop() + topMenuHeight;
+    var article = ".section";
 
-  $(article).each(function (i) {
-    var offsetScroll = $(this).offset().top - $(window).scrollTop();
-    if (
-      offsetScroll <= topMenuHeight + 200 &&
-      offsetScroll >= topMenuHeight - 200 &&
-      scrollItems[i] == "#" + $(this).attr("id") &&
-      $(".hidden:visible")
-    ) {
-      $(menuItems).removeClass("side-scroll-highlight");
-      $(menuItems[i]).addClass("side-scroll-highlight");
-    }
-  });
+    $(article).each(function (i) {
+        var offsetScroll = $(this).offset().top - $(window).scrollTop();
+        if (
+            offsetScroll <= topMenuHeight + 200 &&
+            offsetScroll >= topMenuHeight - 200 &&
+            scrollItems[i] == "#" + $(this).attr("id") &&
+            $(".hidden:visible")
+        ) {
+            $(menuItems).removeClass("side-scroll-highlight");
+            $(menuItems[i]).addClass("side-scroll-highlight");
+        }
+    });
 });
 
