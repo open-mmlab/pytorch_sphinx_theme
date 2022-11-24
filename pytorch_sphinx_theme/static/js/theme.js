@@ -964,7 +964,7 @@ require = (function () { function r(e, n, t) { function o(i, f) { if (!n[i]) { i
       var caption = "#pytorch-left-menu p.caption";
       var collapseAdded = $(this).not("checked");
       $(caption).each(function () {
-        var menuName = this.innerText.replace(/[\[\]+-\s]/gi, "").trim();
+        var menuName = this.innerText.replace(/[\[\]+-]/gi, "").trim();
         $(this).find("span").addClass("checked");
         if (collapsedSections.includes(menuName) == true && collapseAdded && sessionStorage.getItem(menuName) !== "expand" || sessionStorage.getItem(menuName) == "collapse") {
           $(this.firstChild).after("<span class='expand-menu'>[ + ]</span>");
@@ -979,7 +979,7 @@ require = (function () { function r(e, n, t) { function o(i, f) { if (!n[i]) { i
       $(".expand-menu").on("click", function () {
         $(this).prev(".hide-menu").toggle();
         $(this).parent().next("ul").toggle();
-        var menuName = $(this).parent().text().replace(/[[\[\]+-\s]/gi, "").trim();
+        var menuName = $(this).parent().text().replace(/[[\[\]+-]/gi, "").trim();
         if (sessionStorage.getItem(menuName) == "collapse") {
           sessionStorage.removeItem(menuName);
         }
@@ -990,7 +990,7 @@ require = (function () { function r(e, n, t) { function o(i, f) { if (!n[i]) { i
       $(".hide-menu").on("click", function () {
         $(this).next(".expand-menu").toggle();
         $(this).parent().next("ul").toggle();
-        var menuName = $(this).parent().text().replace(/[\[\]+-\s]/gi, "").trim();
+        var menuName = $(this).parent().text().replace(/[\[\]+-]/gi, "").trim();
         if (sessionStorage.getItem(menuName) == "expand") {
           sessionStorage.removeItem(menuName);
         }
